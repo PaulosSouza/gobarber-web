@@ -4,8 +4,11 @@ import { FiPower } from 'react-icons/fi';
 import { Container, Profile, Header, HeaderContent } from './styles';
 
 import logoImg from '../../assets/logo.svg';
+import { useAuth } from '../../hooks/auth';
 
 const Dashboard: React.FC = () => {
+  const { signOut, user } = useAuth();
+
   return (
     <Container>
       <Header>
@@ -13,18 +16,15 @@ const Dashboard: React.FC = () => {
           <img src={logoImg} alt="" />
 
           <Profile>
-            <img
-              src="https://avatars0.githubusercontent.com/u/40366139?s=460&u=7f05ec541ae27c49db6df10ccf75cd805e45823d&v=4"
-              alt="Paulo Henrique"
-            />
+            <img src={user.avatar_url} alt={user.name} />
 
             <div>
               <span>Bem vindo,</span>
-              <strong>Paulo Henrique</strong>
+              <strong>{user.name}</strong>
             </div>
           </Profile>
 
-          <button type="button">
+          <button type="button" onClick={signOut}>
             <FiPower />
           </button>
         </HeaderContent>
